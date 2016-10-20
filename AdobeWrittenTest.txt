@@ -1,0 +1,146 @@
+Adobe Written Test (June-2016) 
+1. What is a transient variable?
+A transient variable is a variable that doesn't take part in serialization process and which is initialized by its default value during de-serialization.The transient keyword can be used to indicate the JVM that the variable is not part of the persistent state of the object.
+
+2. Why would you design a J2EE application so user data is entered by way of a JSP page and managed by an underlying JavaBeans class?
+It's always better to segregate the compoenents that's why MVC came into picture.Seperating ,how data will be displayed from how data is managed makes an application more flexible and efficient.The main task of JSP is to show the content at front end.So front end developer doesn not have to know about Java and he will be easily able to work on jsp, Same way the person who is using java beans does not have to understand about user interface.
+
+3. In a multi-tiered application, which tier is the browser in?
+In a multi-tiered application,browser is in first tier.
+
+4. What advantage does an entity bean have over a session bean?
+Entity bean is persistent because it survives crashes means the state of the bean exists beyond the lifetime of the application
+or the application process.If a crash occurs while data in entity bean is getting updated, the entity bean data is automatically restored to the state
+of last commited database transaction.If crash occurs during transaction,the transaction is backed out to prevent a partial commit from corrupting data.
+Session bean will be manully handeled by the programmer while interacting with Db,session beans are basically for processing the logic not for DB entities.
+
+5. What are J2EE component? List out all other components?
+A J2EE component is a self-contained functional software unit that is assembled into a J2EE application with its related classes and files and communicates with other components.
+The J2EE specification defines the following J2EE components:
+1. Client Componenets : Application clients and applets.
+2. Web components : Servlet and JSP.
+3. Business Components : Enterprise JavaBeans.
+4. Resource adapter components provided by EIS and tool vendors.
+
+6. Thin Client Application
+A thin client which is also known as a slim or lean client,is the one where it just acts as an interface to the user.
+The whole business processing is done at the server end where the server application is hosted.Thin client is a lightweight interface
+to the application that does not have such operations like query databases, execute complex business rules, or connect to legacy applications When we use a thin client, such heavyweight operations are off-
+loaded to enterprise beans executing on the J2EE server, where they can leverage the security, speed, services, and reliability of J2EE server-side technologies.
+
+7. What are synchronized methods and synchronized statements?
+Synchronized Methods : 
+1.when one thread is executing a synchronized method for an object, all other threads that invoke synchronized methods for the same object block (suspend execution) until the first thread is done with the object.
+2.when a synchronized method exits, it automatically establishes a happens-before relationship with any subsequent invocation of a synchronized method for the same object. This guarantees that changes to the state of the object are visible to all threads.
+Synchronized Block : synchronized statements must specify the object that provides the intrinsic lock.The synchronized block can only be executed after a thread has acquired the lock for the object or class referenced.
+Synchronized block generally reduce scope of lock. As scope of lock is inversely proportional to performance, its always better to lock only critical section of code.
+The only real difference is that a synchronized block can choose which object it synchronizes on. A synchronized method can only use 'this' (or the corresponding Class instance for a synchronized class method).
+
+8. Difference between Reader/Writer and InputStream/Output Stream?
+The Reader/Writer class is character-oriented and the InputStream/OutputStream class is byte-oriented.
+Streams work at the byte level, they can read (InputStream) and write (OutputStream) bytes or list of bytes to a stream.
+Reader/Writers add the concept of character on top of a stream. Since a character can only be translated to bytes by using an Encoding, readers and writers have an encoding component.The characters read (Reader) or written (Writer) are automatically converted to bytes by
+the encoding and sent to the stream.
+
+9. Difference between >>> and >>
+They are both right-shift, but >>> is unsigned.The unsigned right shift operator ">>>" shifts a zero into the leftmost position, while the leftmost position after ">>" depends on sign extension.For example 11111110 == -2 in case of >> will result 11111111 becuause it cares about the sign while applying >>> will result 01111111 means zero-extension.
+
+10. what is the purpose of wait() notify() notifyall() in java
+wait( ) : one variance which waits indefinitely for any other thread to call notify or notifyAll method on the object to wake up the current thread.
+       Other variance puts the current thread in wait for specific amount of time before they wake up
+notify( ) : wakes up the first thread that called wait( ) on the same object.
+notifyAll( ) : wakes up all the threads that called wait( ) on the same object. The highest priority thread will run first.
+
+11. who invoke run() method on thread in java
+The run() method is just an ordinary method.As with any other ordinary method, calling it will cause the current thread to execute run() method like an prdinary method.
+When we call start() ,this method will spawn a new thread and let the newly spawned thread execute run().start method which schedules the thread with the JVM.
+The JVM will call the corresponding run() method when the resources and CPU is ready. The JVM is not guaranteed to call the run() method right way when
+the start() method is called, or in the order that the start() methods are called because scheduling scheme.
+
+12.does Garbage collector guarantee what program with  not run out of memory
+No it doesn't guarantee this.It is possible for programs to use up memory resources faster than they are garbage collected, possible for programs to create objects that are not subject to garbage collection and possible for a programmer to mistakingly create objects which never go out of scope, thus consuming more and more memory until all heap is exhausted.
+It is the programmer's responsibility to ensure that objects no longer in use are no longer referenced by the application. That way the garbage collector can do its job and reclaim memory used by these objects.
+
+13. Ilegal float f = 45.0. Cannot convert double to float.
+
+14. System.out.println("Hello World");
+StringBuffer sb1 = new StringBuffer("Amit");
+StringBuffer sb2 = new StringBuffer("Amit");
+String ss1 = "Amit";
+System.out.println(sb1 == sb2);
+System.out.println(sb1.equals(sb2));
+System.out.println(sb1.equals(ss1));
+System.out.println("Poddar".substring(3));
+false,false,false,dar
+
+15. String s = "Dolly";
+String t = s.concat("Hello");
+What are the t and s references to?
+Answer : s will refer "Dolly" and t will refer "DollyHello" because as String is immutable so everytime when we will modify
+s than it will create new object.
+
+16. public class HelloWorld{
+int i[] = {0};
+     public static void main(String []args){
+        int i [] = {1};
+        change_i(i);
+        System.out.println(i[0]);
+     }
+   
+     public static void change_i(int i[]){
+        int j [] = {2};
+        i = j;
+    }
+}
+Answer : 1
+
+17. import java.lang.StringBuffer;
+public class HelloWorld{
+
+     public static void main(String []args){
+        StringBuffer sb = new StringBuffer("abc");
+        String s = new String("abc");
+        sb.append("deC");
+        s.append("deC");
+        sb.Insert(I,"zzz");
+        s.concat(sb);
+        s.trim();
+     }
+}
+Answer :  s.append("deC"); sb.Insert(I,"zzz"); s.concat(sb); will give error.
+Line 4 is illegal because String has no append method.
+Line 5 is also illegal because we have entered first argument as an Integer.
+Line 6 is also illegal because we cannot send StringBuffer as an argument.
+
+18. public class Test{
+static int total = 10;
+     public static void main(String []args){
+        new Test();
+     }
+   
+     public Test(){
+        System.out.println("In Test");
+        System.out.println(this);
+        //System.out.println(Integer.toHexString(System.identityHashCode(this)));
+        //System.out.println(System.identityHashCode(this));
+      
+        int temp = this.total;
+        if(temp>5)
+            System.out.println(temp);
+    }
+
+}
+Answer : In Test Test@+(hashcode of object in hexadecimal) 10
+
+19. What is package and how is it used.
+Packages are used in Java in order to prevent naming conflicts, to control access, to make searching/locating and usage of classes, interfaces, enumerations and annotations easier, etc.
+A Package can be defined as a grouping of related types(classes, interfaces, enumerations and annotations ) providing access protection and name space management.
+Example : java.lang - bundles the fundamental classes
+If a class wants to use another class in the same package, the package name does not need to be used. Classes in the same package find each other without any special syntax.
+If they are in different packages we have to use import keyword.
+Like if we want to use set in our class we have to use : import java.util.Set.
+
+20. what is finally in try-catch-finally blocks?
+Answer : we use these for exception handling.A try block must be followed by either catch or finally.In catch block we catch the exception.
+Generally finally block is used to resource cleanup like close the connection/session/file etc.A finally block is always executed, regardless of whether an exception is thrown. except if user use System.exit(0).
+We can add multiple catches after try based on the order of exception in exception hiearchy.If user return in try block than control will skip all catches block.
